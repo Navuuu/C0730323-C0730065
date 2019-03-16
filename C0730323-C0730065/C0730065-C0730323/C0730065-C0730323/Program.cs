@@ -8,9 +8,7 @@ namespace C0730065_C0730323
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-        }
+        
         public class BankAccount
         {
             private string m_customerName;
@@ -77,7 +75,7 @@ namespace C0730065_C0730323
                 ba.Credit(5.77);
                 ba.Debit(11.22);
                 Console.WriteLine("Current balance is ${0}", ba.Balance);
-
+                Console.ReadLine();
             }
         }
 
