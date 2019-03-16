@@ -13,6 +13,8 @@ namespace BankTests
             this.beginningBalance = beginningBalance;
         }
 
+        public static string DebitAmountLessThanZeroMessage { get; internal set; }
+        public static string DebitAmountExceedsBalanceMessage { get; internal set; }
         public double Balance { get; internal set; }
 
         internal void Debit(double debitAmount)

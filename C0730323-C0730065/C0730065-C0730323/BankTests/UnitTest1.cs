@@ -3,42 +3,213 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BankTests
 {
+
+
     [TestClass]
-    public class UnitTest1
+    public class BankAccountTests
     {
+        // Parminder kaur Bhangu(c0730065)
+        //Ravneet kaur(C0730323)
+        public void Debit_WithvalidAmount_UpdatesBalance()
+
+
+
+        {
+
+
+
+            double beginningBalance = 11.99;
+
+
+
+            double debitAmount = 4.55;
+
+
+
+            double expected = 7.44;
+
+
+
+            BankAccount account = new BankAccount("Mr. Bryan Walton", beginningBalance);
+
+
+
+            //act
+
+
+
+            account.Debit(debitAmount);
+
+
+
+            //Assert
+
+
+
+            double actual = account.Balance;
+
+
+
+            Assert.AreEqual(expected, actual, 0.001, "Account not debited correctly");
+
+
+
+        }
+
+
+
         [TestMethod]
-        public void TestMethod1()
-        { }
-            public void Debit_WithValidAmount_UpdatesBalance()
+
+
+
+
+
+
+
+        public void Debit_WhenAmountIsLessThanZero_ShouldThrowArguementOutOfRange()
+
+
+
+        {
+
+
+
+            //Arrange
+
+
+
+            double beginningBalance = 11.99;
+
+
+
+            double debitAmount = -100.00;
+
+
+
+            BankAccount account = new BankAccount("Mr. Bryan Walton", beginningBalance);
+
+
+
+            //act
+
+
+
+            try
+
+
+
+            { account.Debit(debitAmount); }
+
+
+
+
+
+
+
+            catch (ArgumentOutOfRangeException e)
+
+
 
             {
 
-                //Arrange
 
-                double beginningBalance = 11.99;
 
-                double debitAmount = 4.55;
-
-                double expected = 7.44;
-
-                BankAccount account = new BankAccount("Parminder kaur and ravneet kaur", beginningBalance);
+                StringAssert.Contains(e.Message, BankAccount.DebitAmountLessThanZeroMessage);
 
 
 
-                //Act
-
-                account.Debit(debitAmount);
+                return;
 
 
-
-                //Assert
-
-                double actual = account.Balance;
-
-                Assert.AreEqual(expected, actual, 0.0001, "Account nt debited correctly");
 
             }
 
 
+
+            Assert.Fail("The expected exception was not thrown.");
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+        [TestMethod]
+
+
+
+
+
+
+
+        public void Debit_WhenAmountIsmorethanbalance_ShouldThrowArguementOutOfRange()
+
+
+
+        {
+
+
+
+            //Arrange
+
+
+
+            double beginningBalance = 11.99;
+
+
+
+            double debitAmount = 20.00;
+
+
+
+            BankAccount account = new BankAccount("Mr. Bryan Walton", beginningBalance);
+
+
+
+            //act
+
+
+
+            try
+
+
+
+            { account.Debit(debitAmount); }
+
+
+
+            catch (ArgumentOutOfRangeException e)
+
+
+
+            {
+
+
+
+                StringAssert.Contains(e.Message, BankAccount.DebitAmountExceedsBalanceMessage);
+
+
+
+                return;
+
+
+
+            }
+
+
+
+            Assert.Fail("The expected exception was not thrown.");
         }
     }
+}
+
+
+
